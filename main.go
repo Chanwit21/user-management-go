@@ -20,7 +20,7 @@ func main() {
 	routes.RegisterUserRoutes(app, userController)
 
 	// Start
-	port := "8080"
+	port := "3000"
 	fmt.Println("Listening on :" + port)
 	if err := app.Listen(":" + port); err != nil {
 		panic(err)
