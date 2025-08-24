@@ -1,11 +1,18 @@
 package routes
 
-import (
-	"github.com/gofiber/fiber/v2"
-	"user-management-go/controller"
-)
+import "github.com/gofiber/fiber/v2"
 
-func RegisterUserRoutes(app *fiber.App, ctl *controller.UserController) {
+// Interface for controller methods
+type UserControllerInterface interface {
+	GetUsers(*fiber.Ctx) error
+	GetUser(*fiber.Ctx) error
+	CreateUser(*fiber.Ctx) error
+	UpdateUser(*fiber.Ctx) error
+	DeleteUser(*fiber.Ctx) error
+}
+
+// Accept the interface instead of concrete type
+func RegisterUserRoutes(app *fiber.App, ctl UserControllerInterface) {
 	app.Get("/users", ctl.GetUsers)
 	app.Get("/users/:userId", ctl.GetUser)
 	app.Post("/users", ctl.CreateUser)
